@@ -1,0 +1,15 @@
+trigger ContactTrigger on Contact (after insert, after delete) {
+    
+    String actionType;
+    if(trigger.isAfter){
+        if(trigger.isInsert){
+            actionType = 'insert';
+            ContactTriggerHandler.updateCountOfContact(Trigger.new,actionType );
+        } 
+        if(trigger.isDelete) {
+            actionType = 'delete';
+            ContactTriggerHandler.updateCountOfContact(Trigger.old,actionType);
+        }
+    }
+    
+}
